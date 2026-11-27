@@ -1,0 +1,656 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Lewius Gordon Portfolio Design System
+ * Crisp white background, near-black (#151515) sidebar, neutral #E4E4E7 borders,
+ * softer grey secondary typography, green availability dot, no yellow accents.
+ *
+ * Shared design system (applies to every section added after the opening screen):
+ *  - Font: Satoshi throughout.
+ *  - Background #FFFFFF, primary text #09090B, secondary #52525B, muted #A1A1AA.
+ *  - Outer card surface #F4F4F5, inner card surface #FAFAFA, dark controls #27272A.
+ *  - Dividers #E4E4E7. No yellow accents. border-box sizing.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Reference design tokens */
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-panel: var(--sidebar-panel);
+  --color-sidebar-panel-hover: var(--sidebar-panel-hover);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-text: var(--sidebar-text);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-gutter-bg: var(--gutter-bg);
+  --color-main-frame: var(--main-frame);
+  --color-status-capsule: var(--status-capsule);
+  --color-booking-bg: var(--booking-bg);
+  --color-booking-fg: var(--booking-fg);
+  --color-availability-green: var(--availability-green);
+
+  /* Shared design-system tokens (used by all subsequent sections) */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-surface-outer: var(--surface-outer);
+  --color-surface-inner: var(--surface-inner);
+  --color-control-dark: var(--control-dark);
+  --color-divider: var(--divider);
+  --color-brand-yellow: var(--brand-yellow);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Neutral palette — no blue tint */
+  --background: oklch(1 0 0); /* #FFFFFF */
+  --foreground: oklch(0.145 0 0); /* near-black text */
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  --primary: oklch(0.145 0 0);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.96 0 0); /* #F4F4F5 */
+  --secondary-foreground: oklch(0.145 0 0);
+
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+
+  --accent: oklch(0.96 0 0);
+  --accent-foreground: oklch(0.145 0 0);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+
+  --border: oklch(0.89 0 0); /* #E4E4E7 */
+  --input: oklch(0.89 0 0);
+  --ring: oklch(0.7 0 0);
+
+  /* Sidebar: near-black #151515 */
+  --sidebar-bg: oklch(0.135 0 0); /* #151515 */
+  --sidebar-panel: oklch(0.18 0 0); /* #202020 hover */
+  --sidebar-panel-hover: oklch(0.22 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-text: oklch(1 0 0);
+  --sidebar-muted: oklch(0.63 0 0); /* #A1A1AA */
+
+  /* Status capsule / booking */
+  --status-capsule: oklch(0.96 0 0); /* #F4F4F5 */
+  --booking-bg: oklch(0.96 0 0); /* #F4F4F5 */
+  --booking-fg: oklch(0.145 0 0); /* black text */
+
+  /* Availability green dot */
+  --availability-green: oklch(0.62 0.21 142); /* #09B001 */
+
+  --gutter-bg: oklch(0.981 0 0); /* #F9F9F9 outer gutters */
+  --main-frame: oklch(1 0 0); /* pure white */
+
+  /* Shared design-system palette (all subsequent sections) — exact hex targets */
+  --text-primary: oklch(0.1408 0.0044 285.82); /* #09090B */
+  --text-secondary: oklch(0.4419 0.0146 285.79); /* #52525B */
+  --text-muted: oklch(0.7118 0.0129 286.07); /* #A1A1AA */
+  --surface-outer: oklch(0.9674 0.0013 286.38); /* #F4F4F5 */
+  --surface-inner: oklch(0.9851 0 0); /* #FAFAFA */
+  --control-dark: oklch(0.2739 0.0055 286.03); /* #27272A */
+  --divider: oklch(0.9197 0.004 286.32); /* #E4E4E7 */
+
+  /* Brand yellow — used sparingly (~10% of the interface) */
+  --brand-yellow: #ffda57;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--color-gutter-bg);
+    color: var(--color-foreground);
+    font-family:
+      "Satoshi",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+}
+
+/* Continuous seamless marquee animation for image strip */
+@keyframes continuous-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-strip {
+  animation: continuous-marquee 140s linear infinite;
+  will-change: transform;
+}
+
+/* Entrance animation: opacity 0->1, translateY(12px)->0, 600ms ease-out */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise-in {
+  animation: rise-in 600ms ease-out both;
+}
+
+/* Section entrance: 500ms ease-out, translateY 12px, supports 60ms stagger via --rise-delay */
+@keyframes section-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-section-rise {
+  animation: section-rise 500ms ease-out both;
+  animation-delay: var(--rise-delay, 0ms);
+  will-change: transform, opacity;
+}
+
+/* Gentle pulse for the availability dot */
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.25);
+  }
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-strip {
+    animation: none;
+    transform: none;
+  }
+  .animate-rise-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .animate-section-rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .animate-soft-pulse {
+    animation: none;
+  }
+}
+
+/* Center-fade mask for the client-logo trust strip: center logos fully
+   visible, gradually fading toward both edges (KDM-style). Kept subtle. */
+.trust-strip-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
+}
+
+/* Sidebar cover — black-to-charcoal gradient with a subtle brand-yellow accent.
+ * Used when no real cover image is supplied. Kept restrained; no face is stretched. */
+.sidebar-cover {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(255, 218, 87, 0.16), transparent 38%),
+    linear-gradient(135deg, #181818 0%, #2b2b2e 52%, #161616 100%);
+}
+
+/* Thin scrollbar for sidebar internal scroll */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ── Shared design-system utilities (used by all subsequent sections) ── */
+
+/* Section label pill: 36px tall, radius 50px, white text on dark gradient */
+@utility section-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  height: 36px;
+  padding: 8px 14px;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+  background-image: linear-gradient(198deg, #27272a 0%, #141414 100%);
+}
+
+/* Standard dark button: #27272A, white text, 40px height, 10px radius, 24px h-padding */
+@utility btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 24px;
+  border-radius: 10px;
+  background-color: #27272a;
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+  box-shadow: inset 0 3px 1px rgba(255, 255, 255, 0.1);
+  transition: all 200ms ease;
+  outline: none;
+
+  &:hover {
+    background-color: #1f1f22;
+  }
+
+  &:focus-visible {
+    box-shadow:
+      inset 0 3px 1px rgba(255, 255, 255, 0.1),
+      0 0 0 2px #fff,
+      0 0 0 4px var(--color-control-dark);
+  }
+}
+
+/* Typography helpers — fluid where helpful, preserving the desktop calibration */
+@utility heading-main {
+  font-size: clamp(30px, 4.2vw, 48px);
+  line-height: clamp(34px, 4.6vw, 52px);
+  letter-spacing: -0.05em;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+@utility heading-medium {
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: clamp(28px, 3.4vw, 36px);
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+@utility heading-small {
+  font-size: clamp(20px, 2.2vw, 24px);
+  line-height: clamp(24px, 2.6vw, 28px);
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* ── Shared service card hover effect ──
+ * Hovering ANYWHERE inside a card transforms the whole card: dark background,
+ * radial highlight overlay, reversed icon, white title, muted description,
+ * translucent pills, and (on /services) reversed checklist. No layout shift.
+ * Restricted to devices that support hovering; reduced-motion keeps states.
+ */
+@utility svc-card {
+  position: relative;
+  isolation: isolate;
+  background-color: #f4f4f5;
+  border-radius: clamp(28px, 5vw, 56px);
+  padding: clamp(20px, 3vw, 32px);
+  transition:
+    background-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.svc-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  background: radial-gradient(
+    72% 100% at 22.5% 6.6%,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+@media (hover: hover) {
+  .svc-card:hover {
+    background-color: #09090b;
+    box-shadow:
+      0 28px 80px rgba(0, 0, 0, 0.15),
+      0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+  .svc-card:hover::before {
+    opacity: 1;
+  }
+  .svc-card:hover .svc-title {
+    color: #ffffff;
+  }
+  .svc-card:hover .svc-desc {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .svc-card:hover .svc-icon-circle {
+    background-color: #ffffff;
+    color: #09090b;
+  }
+  .svc-card:hover .svc-pill {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+  }
+  .svc-card:hover .svc-check-text {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .svc-card:hover .svc-check-box {
+    background-color: #09090b;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-card,
+  .svc-card::before,
+  .svc-title,
+  .svc-desc,
+  .svc-icon-circle,
+  .svc-pill,
+  .svc-check-text,
+  .svc-check-box {
+    transition: none;
+  }
+}
+
+.svc-title {
+  color: #09090b;
+  transition: color 300ms ease;
+}
+.svc-desc {
+  color: #52525b;
+  transition: color 300ms ease;
+}
+.svc-icon-circle {
+  background-color: #27272a;
+  color: #ffffff;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+.svc-pill {
+  color: #09090b;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+.svc-check-text {
+  color: #09090b;
+  transition: color 300ms ease;
+}
+.svc-check-box {
+  background-color: #ffffff;
+  border: 1px solid #e4e4e7;
+  color: #09090b;
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    color 300ms ease;
+}
+
+/* ── Process section: reveal-on-scroll + stat gradient ──
+ * Entrance: 600ms cubic-bezier(0.22,1,0.36,1), translateY per element.
+ * Triggered by adding `.is-visible` once the element enters the viewport.
+ * Reduced-motion shows everything immediately.
+ */
+@keyframes process-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes process-fade-up-lg {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.process-reveal {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.process-reveal-pill {
+  transform: translateY(20px);
+}
+.process-reveal-word {
+  display: inline-block;
+  transform: translateY(20px);
+}
+.process-reveal-block {
+  transform: translateY(40px);
+}
+.process-reveal.is-visible {
+  animation: process-fade-up 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+.process-reveal-pill.is-visible {
+  animation-name: process-fade-up;
+}
+.process-reveal-block.is-visible {
+  animation-name: process-fade-up-lg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-reveal,
+  .process-reveal-pill,
+  .process-reveal-word,
+  .process-reveal-block {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+/* Statistic gradient text — clipped to the text fill */
+.process-stat-figure {
+  background-image: linear-gradient(109deg, #ffffff 43%, rgba(255, 255, 255, 0.7) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Shared project card ──
+ * Used by the homepage Featured Projects grid, the /works listing, and the
+ * related-works section. Square aspect, rounded-rectangle corners (56px
+ * desktop, responsive), shape fixed on hover. Image clipped and scaled
+ * 1 → 1.03 on hover (500ms ease-out). Name badge reveals on hover/focus.
+ * On touch devices the badge is always visible.
+ */
+.pc-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 56px;
+  overflow: hidden;
+  background: #fafafa;
+  outline: none;
+  text-decoration: none;
+}
+.pc-card-media {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.pc-card-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 500ms ease-out;
+}
+.pc-card-badge {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 8px 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+.pc-card-name {
+  font-family:
+    "Satoshi",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  letter-spacing: -0.26px;
+  color: #09090b;
+  white-space: nowrap;
+}
+.pc-card-arrow {
+  width: 14px;
+  height: 14px;
+  color: #52525b;
+  flex-shrink: 0;
+}
+
+/* Hover / keyboard focus: zoom image + reveal badge */
+@media (hover: hover) {
+  .pc-card:hover .pc-card-img,
+  .pc-card:focus-visible .pc-card-img {
+    transform: scale(1.03);
+  }
+  .pc-card:hover .pc-card-badge,
+  .pc-card:focus-visible .pc-card-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.pc-card:focus-visible {
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px #27272a;
+}
+
+/* Touch devices: keep the badge visible so each project is identifiable */
+@media (hover: none) {
+  .pc-card-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive corners */
+@media (max-width: 809px) {
+  .pc-card {
+    border-radius: 40px;
+  }
+  .pc-card-badge {
+    left: 12px;
+    bottom: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-card-img,
+  .pc-card-badge {
+    transition: none;
+  }
+}
